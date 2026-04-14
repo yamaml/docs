@@ -1,5 +1,5 @@
 ---
-title: YAMA — Metadata Application Profiles, Simplified
+title: YAMA & YAMAML
 toc: false
 ---
 

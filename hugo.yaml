@@ -1,5 +1,5 @@
 # Hugo configuration for YAMA documentation site
-title: YAMA
+title: YAMA & YAMAML Documentation
 baseURL: https://docs.yamaml.org/
 
 # Site language (English only)
