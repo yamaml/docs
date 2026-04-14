@@ -216,6 +216,8 @@ Four constraint forms:
 > To apply both a class constraint **and** property constraints to a structured value, use the `#blockId` form and specify the class in the referenced block's ID statement (Property column).
 >
 > Defining an anonymous (blank node) class constraint without an ID row is not supported in SimpleDSP (it can be done directly in OWL-DSP).
+
+> **Multi-block references (yama-cli extension).** The published SimpleDSP specification supports one `#blockId` per statement. The yama-cli and Tapir tools accept a space-separated list `#A #B` in the Constraint column so that profiles authored with multi-shape disjunctions (e.g. from DCTAP or YAMAML) can round-trip through SimpleDSP without loss. This form is an extension, not part of the spec: consumers that follow only the published spec read the first `#blockId` and ignore the rest.
 >
 > Self-references are valid: `#Setting` can reference the `[Setting]` block it appears in, creating a recursive structure.
 

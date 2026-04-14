@@ -239,6 +239,30 @@ IRI and BNODE statements reference other descriptions by key:
 }
 ```
 
+### 7.1 Multi-shape references (disjunctions)
+
+Both `IriStatement` and `BnodeStatement` accept `description` as either a single string or a list of strings. A list expresses that the value may conform to any one of the named descriptions:
+
+```pkl
+["creator"] = new IriStatement {
+  property = "dcterms:creator"
+  description = new Listing<String> { "Person"; "Organization" }
+}
+```
+
+This renders to YAMAML as:
+
+```yaml
+creator:
+  property: dcterms:creator
+  type: IRI
+  description:
+    - Person
+    - Organization
+```
+
+Downstream generators map the list to the appropriate disjunction idiom of each target format: `sh:or` in SHACL, `(@<A> OR @<B>)` in ShEx, `owl:unionOf` in OWL-DSP, space-separated `valueShape` in DCTAP (following [DCMI SRAP](https://github.com/dcmi/dc-srap)), and space-separated `#A #B` in SimpleDSP (yama-cli extension).
+
 ## 8. Statements
 
 Statement fields map 1-to-1 with those in [Section 4 of the YAMAML specification](spec#4-statements). The key PKL-specific choice is **which statement subclass to instantiate**:

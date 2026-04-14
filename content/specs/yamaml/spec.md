@@ -228,6 +228,8 @@ Descriptions can reference other descriptions to model relationships:
 - **IRI references** — A statement with `type: IRI` and `description: <name>` creates a typed relationship to another description.
 - **Blank node references** — A statement with `type: BNODE` and `description: <name>` creates an inline blank node with the properties of the referenced description.
 
+The `description` field accepts **either a single name** (scalar) **or a list of names** (multi-shape disjunction). A list means the value may conform to any one of the named descriptions — "creator may be a Person or an Organization".
+
 ```yaml
 descriptions:
   person:
@@ -236,11 +238,20 @@ descriptions:
       address:
         property: schema:address
         type: BNODE
-        description: postalAddress    # inline blank node
+        description: postalAddress    # single-shape: inline blank node
       knows:
         property: foaf:knows
         type: IRI
-        description: person           # self-reference (IRI link)
+        description: person           # single-shape: self-reference
+
+  work:
+    statements:
+      creator:
+        property: dcterms:creator
+        type: IRI
+        description:                  # multi-shape disjunction
+          - person
+          - organization
 
   postalAddress:
     a: schema:PostalAddress
@@ -250,6 +261,18 @@ descriptions:
         type: literal
         datatype: xsd:string
 ```
+
+**Cross-format behaviour for multi-shape references:**
+
+| Target format | Emitted as |
+|---|---|
+| DCTAP | `valueShape: person organization` (space-separated, [DCMI SRAP](https://github.com/dcmi/dc-srap) convention) |
+| SHACL | `sh:or` with a list of `sh:node` blank nodes |
+| ShEx | `(@<person> OR @<organization>)` |
+| OWL-DSP | `owl:onClass [ owl:unionOf ( <person> <organization> ) ]` |
+| SimpleDSP | `#person #organization` (yama-cli extension; the published SimpleDSP spec supports only a single `#ref`) |
+
+For instance-data generation (`type: BNODE` with multiple `description` entries), the first name is used — blank-node generation is one-shot, not disjunctive.
 
 ---
 
