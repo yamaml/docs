@@ -1,0 +1,60 @@
+# Hugo configuration for YAMA documentation site
+title: YAMA
+baseURL: https://docs.yamaml.org/
+
+# Site language (English only)
+defaultContentLanguage: en
+
+menu:
+  main:
+    - name: Specifications
+      pageRef: /specs
+      weight: 1
+    - name: About
+      pageRef: /about
+      weight: 2
+    - name: Search
+      weight: 3
+      params:
+        type: search
+    - name: GitHub
+      weight: 4
+      url: "https://github.com/yamaml"
+      params:
+        icon: github
+
+# Map specs section to docs layout (enables Hextra sidebar navigation)
+cascade:
+  - type: docs
+    target:
+      path: /specs/**
+
+# Import Hextra theme as module
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+# Hextra theme params
+params:
+  description: A human-friendly markup language for metadata application profiles
+  navbar:
+    displayTitle: true
+    displayLogo: false
+  footer:
+    displayCopyright: true
+    displayPoweredBy: false
+    copyright: "Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)"
+  theme:
+    default: system
+    displayToggle: true
+  toc:
+    displayTags: true
+  editURL:
+    enable: false

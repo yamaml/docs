@@ -1,0 +1,28 @@
+# Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Hugo module cache (downloaded on build)
+.hugo_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Cloudflare Wrangler
+.wrangler/
+wrangler.toml.bak
+
+# AI assistant config
+CLAUDE.md
