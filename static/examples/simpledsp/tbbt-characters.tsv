@@ -1,0 +1,25 @@
+[@NS]
+schema	http://schema.org/
+@base	http://purl.org/yama/examples/2022/tbbt/0.1/
+
+[MAIN]
+#Name	Property	Min	Max	ValueType	Constraint	Comment
+ID	foaf:Person	1	1	ID		Unique identifier for the character
+Name	foaf:name	1	1	literal	xsd:string	Full name of the character
+Family Name	foaf:familyName	1	1	literal	xsd:string	Family name
+First Name	foaf:firstName	1	1	literal	xsd:string	Given name
+Job Title	schema:jobTitle	0	1	literal	xsd:string	Job title of the character
+Parents	schema:parent	0	-	IRI		Parents of the character
+Children	schema:children	0	-	IRI		Children of the character
+Knows	foaf:knows	0	-	IRI		Other characters this character knows
+Wikidata	rdfs:seeAlso	0	-	IRI		Wikidata entity for this character
+Home Address	schema:address	0	1	structured	#address	Home address of the character
+Portrayed by	schema:byArtist	0	1	IRI		Actor who portrays this character
+
+[address]
+#Name	Property	Min	Max	ValueType	Constraint	Comment
+Street	schema:streetAddress	0	1	literal	xsd:string	Building and street address
+Locality	schema:addressLocality	0	1	literal	xsd:string	City or town
+Region	schema:addressRegion	0	1	literal	xsd:string	State, province, or region
+Country	schema:addressCountry	0	1	literal	xsd:string	Country
+Postal Code	schema:postalCode	0	1	literal	xsd:string	Postal or ZIP code

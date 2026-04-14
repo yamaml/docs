@@ -1,0 +1,19 @@
+[@NS]
+dcndl	http://ndl.go.jp/dcndl/terms/
+ndlsh	http://id.ndl.go.jp/auth/ndlsh/
+bsh	http://id.ndl.go.jp/auth/bsh/
+ndlbooks	http://iss.ndl.go.jp/books/
+@base	http://ndl.go.jp/dcndl/dsp/biblio
+
+[MAIN]
+#項目規則名	プロパティ	最小	最大	値タイプ	値制約	説明
+書誌ID	foaf:Document	1	1	ID	ndlbooks:	文書のID
+タイトル	dcterms:title	1	1	構造化	#構造化タイトル	文書の表題
+著者	dcterms:creator	0	1	構造化	foaf:Agent	文書の作者
+発行日	dcterms:issued	1	1	文字列	xsd:date	文書の発行日
+主題	dcterms:subject	0	-	参照値	ndlsh: bsh:	文書の主題
+
+[構造化タイトル]
+#項目規則名	プロパティ	最小	最大	値タイプ	値制約	説明
+リテラル値	xl:literalForm	1	1	文字列		タイトル自身
+読み	dcndl:transcription	0	1	文字列		タイトルの読み
