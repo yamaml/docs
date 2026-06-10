@@ -673,6 +673,8 @@ Processors MUST expand prefixed names to full IRIs using the following rules:
 3. Otherwise, if `base` is defined, expand to `base + term`.
 4. Otherwise, use the term as-is.
 
+> **Note (authoring guidance):** expansion in rule 3 is plain string concatenation. Authors SHOULD end `base` with `#` or `/` so that expanded IRIs are well-formed; a base such as `http://example.org/ap` produces fused IRIs like `http://example.org/apMAIN`, whereas `http://example.org/ap#` produces `http://example.org/ap#MAIN`.
+
 ### 8.2 Source Path Resolution
 
 Data source paths in mappings are resolved as follows:
