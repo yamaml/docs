@@ -418,15 +418,19 @@ The `inScheme` property constrains IRI values to specific vocabulary namespaces:
 subject:
   property: dcterms:subject
   type: IRI
-  inScheme: skos:       # values must be from the SKOS namespace
+  inScheme: "skos:"     # values must be from the SKOS namespace
 
 classification:
   property: dcterms:subject
   type: IRI
   inScheme:             # values from either namespace
-    - ndlsh:
-    - lcsh:
+    - "ndlsh:"
+    - "lcsh:"
 ```
+
+> **Note:** Because a scheme prefix ends with `:`, the value MUST be quoted.
+> An unquoted scalar (`inScheme: skos:`) is not valid YAML, and an unquoted
+> list item (`- ndlsh:`) parses as a mapping rather than a string.
 
 ---
 
@@ -573,7 +577,7 @@ RDF generation requires data mappings. Each record in the data source produces a
 | `statement.min/max` | Cardinality (`*`, `+`, `?`, `{m,n}`) |
 | `statement.description` | Shape reference `@<shape>` |
 | `statement.values` | Value set `["a" "b"]` |
-| `statement.pattern` | String facet `//pattern//` |
+| `statement.pattern` | String facet `/pattern/` (literal `/` escaped as `\/`) |
 | `statement.facets.*` | Numeric/string facets |
 
 ### 7.4 OWL-DSP
@@ -611,9 +615,13 @@ SimpleDSP value type resolution:
 | Condition | SimpleDSP Value Type |
 |-----------|---------------------|
 | Has `description` or `a` (class constraint) | `structured` (構造化) |
-| `type` is IRI/URI | `reference` (参照値) |
+| `type` is IRI/URI | `IRI` (参照値) |
 | `type` is literal, or `datatype` present, or `values` present | `literal` (文字列) |
 | None of the above | *(empty)* (制約なし) |
+
+The parenthesised forms are the Japanese keywords from the original SimpleDSP
+specification; `IRI`, `literal`, and `structured` are the English keywords
+defined in the [SimpleDSP specification](/specs/simpledsp/spec/) §4.5.
 
 ### 7.6 DCTAP
 

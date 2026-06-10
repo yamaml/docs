@@ -323,7 +323,7 @@ The `[構造化タイトル]` block (referenced as `#構造化タイトル`) bec
 | ValueType = `literal` | Constraint → `owl:onDataRange` |
 | ValueType = `structured` + `#ref` | Constraint → `owl:onClass <#ref>` |
 | ValueType = `structured` + class | Constraint → `owl:onClass className` |
-| ValueType = `reference` + vocab | Constraint → `owl:onClass [dsp:inScheme vocab:]` |
+| ValueType = `IRI` + vocab | Constraint → `owl:onClass [dsp:inScheme vocab:]` |
 | ValueType = `ID` (Property col) | → `dsp:resourceClass` |
 | ValueType = `ID` (Constraint col) | → `reg:resourceNsURI` / `dsp:valueURIOccurrence "mandatory"` |
 | Comment column | `rdfs:comment` |
